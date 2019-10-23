@@ -318,8 +318,11 @@ open_new_file ()
 	  free (temp);
 	  return TRUE;
 	}
-      fprintf (stderr, "File %s is unavailable.\n", file_names->name);
-      exit (1);
+      else
+        {
+          fprintf (stderr, "File %s is unavailable.\n", file_names->name);
+          return FALSE;
+        }
     }
   
   /* If we fall through to here, we should return stdin. */
