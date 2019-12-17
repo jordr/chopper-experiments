@@ -3,7 +3,7 @@
 ulimit -s unlimited
 rm -rf /tmp/sandbox && mkdir -p /tmp/sandbox
 
-klee \
+kleegacy \
     --output-dir=out-chopper-no-slice \
     --simplify-sym-indices \
     --max-time=3600 \
