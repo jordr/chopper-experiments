@@ -30,7 +30,7 @@ GIT:=git
 ##
 ## LLVM
 ##
-LLVM_BUILD_DIR:=
+LLVM_BUILD_DIR:=/home/jruiz/code/llvm-build/Release+Debug+Asserts/bin
 LLVM_CONFIG:=$(LLVM_BUILD_DIR)/llvm-config
 CLANG:=$(LLVM_BUILD_DIR)/clang
 CLANGXX:=$(LLVM_BUILD_DIR)/clang++
@@ -57,8 +57,9 @@ STP=$(STP_DIR)/build/stp
 MINISAT_DIR=$(TOOLS)/minisat
 MINISAT=$(MINISAT_DIR)/build/libminisat.so
 
-KLEE_SRC_DIR=
-KLEE_DIR=
+KLEE_SRC_DIR=/home/jruiz/code/chopper
+KLEE_DIR=$(KLEE_SRC_DIR)/build# custom
+#KLEE_DIR=$(KLEE_SRC_DIR)/legacy_build# custom
 KLEE_BIN=$(KLEE_DIR)/bin
 KLEE=$(KLEE_BIN)/klee
 
