@@ -29,6 +29,7 @@ print_header()
 
 print_results()
 {
+    echo "=== Print results of '$1' ===" >&2
     cd $1
     print_header
     print_single_result   "klee" "KLEE"
