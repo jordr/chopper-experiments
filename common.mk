@@ -58,7 +58,7 @@ MINISAT_DIR=$(TOOLS)/minisat
 MINISAT=$(MINISAT_DIR)/build/libminisat.so
 
 KLEE_SRC_DIR=/home/ubuntu/code/chopper
-KLEE_DIR=$(KLEE_SRC_DIR)/build# custom
+KLEE_DIR=$(KLEE_SRC_DIR)/legacy_build# custom
 KLEE_BIN=$(KLEE_DIR)/bin
 KLEE=$(KLEE_BIN)/klee
 
