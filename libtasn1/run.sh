@@ -99,10 +99,16 @@ mv run-cse-* $1
 prepare_klee()
 {
 [ -d $1 ] && rm -r $1
+rm -r klee-run-random
+rm -r klee-run-dfs
+rm -r klee-run-coverage
 }
 prepare_cse()
 {
-prepare_klee $1
+[ -d $1 ] && rm -r $1
+rm -r cse-run-random
+rm -r cse-run-dfs
+rm -r cse-run-coverage
 }
 
 ## MAIN
