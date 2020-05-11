@@ -11,12 +11,14 @@ make
 
 pids=
 # Make split searcher
-echo "** Running split searchers in parallel"
+echo "** Running split searchers"
+echo "*** [cse-spa-split-searcher]"
 prepare_cse cse-spa-split-searcher
 make KSLICE="-use-recovery-cache=1 -use-pta-mode=static -split-search=1" all-cse
 	pids+=" $!"
 terminate_cse cse-spa-split-searcher
 
+echo "*** [cse-pspa-split-searcher]"
 prepare_cse cse-pspa-split-searcher
 make KSLICE="-use-recovery-cache=1 -use-pta-mode=symbolic -use-modular-pta -split-search=1" all-cse
 	pids+=" $!"
@@ -27,11 +29,13 @@ terminate_cse cse-pspa-split-searcher
 pids=
 # Make no searcher
 echo "** Running no searcher in parallel"
+dcho "*** [cse-spa-no-searcher]"
 prepare_cse cse-spa-no-searcher
 make KSLICE="-use-recovery-cache=1 -use-pta-mode=static" all-cse
     pids+=" $!"
 terminate_cse cse-spa-no-searcher
 
+dcho "*** [cse-pspa-no-searcher]"
 prepare_cse cse-pspa-no-searcher
 make KSLICE="-use-recovery-cache=1 -use-pta-mode=symbolic -use-modular-pta" all-cse
     pids+=" $!"
