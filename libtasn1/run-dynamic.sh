@@ -11,37 +11,29 @@ make
 
 pids=
 # Make split searcher
-echo "** Running split searchers"
-echo "*** [cse-spa-split-searcher]"
-prepare_cse cse-spa-split-searcher
-make KSLICE="-use-recovery-cache=1 -use-pta-mode=static -split-search=1" all-cse
-	pids+=" $!"
-terminate_cse cse-spa-split-searcher
+#echo "** Running split searchers"
+#echo "*** [cse-spa-split-searcher]"
+#prepare_cse cse-spa-split-searcher
+#make KSLICE="-use-recovery-cache=1 -use-pta-mode=static -split-search=1" all-cse
+#terminate_cse cse-spa-split-searcher
+
 
 echo "*** [cse-pspa-split-searcher]"
 prepare_cse cse-pspa-split-searcher
 make KSLICE="-use-recovery-cache=1 -use-pta-mode=symbolic -use-modular-pta -split-search=1" all-cse
-	pids+=" $!"
 terminate_cse cse-pspa-split-searcher
 
-#wait $pids || { echo "there were errors" >&2; exit 1; }
-
-pids=
 # Make no searcher
 echo "** Running no searcher in parallel"
-dcho "*** [cse-spa-no-searcher]"
+echo "*** [cse-spa-no-searcher]"
 prepare_cse cse-spa-no-searcher
 make KSLICE="-use-recovery-cache=1 -use-pta-mode=static" all-cse
-    pids+=" $!"
 terminate_cse cse-spa-no-searcher
 
-dcho "*** [cse-pspa-no-searcher]"
+echo "*** [cse-pspa-no-searcher]"
 prepare_cse cse-pspa-no-searcher
 make KSLICE="-use-recovery-cache=1 -use-pta-mode=symbolic -use-modular-pta" all-cse
-    pids+=" $!"
 terminate_cse cse-pspa-no-searcher
-    
-#wait $pids || { echo "there were errors" >&2; exit 1; }
 
 cd ..
 }
@@ -140,6 +132,7 @@ terminate_cse()
 mkdir $1
 mv cse-run-* $1
 mv run-cse-* $1
+grep -n "Elapsed" $1/*/info
 }
 
 prepare_klee()
