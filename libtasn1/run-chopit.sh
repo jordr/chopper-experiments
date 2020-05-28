@@ -17,15 +17,15 @@ cd ..
 cd CVE-2015-2806
 cd nurs
 date > nurs.txt
-chopit.py -b=autokleepspa --inline=strlen,strcat,strncat --search=nurs:covnew -c=" --error-location=parser_aux.c:574 --max-time=3600 --max-memory=8095 " -f="_asn1_ltostr,read,syscall -keep=asn1_parser2tree,_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 32"
+chopit.py -b=autokleepspa --inline=strlen,strcat,strncat --search=nurs:covnew -c=" --error-location=parser_aux.c:574 --max-time=3600 --max-memory=8095 " -f="_asn1_ltostr,read -keep=asn1_parser2tree,_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 32"
 cd ..
 cd random
 date > random.txt
-chopit.py -b=autokleepspa --inline=strlen,strcat,strncat --search=random-state -c=" --error-location=parser_aux.c:574 --max-time=3600 --max-memory=8095 " -f="_asn1_ltostr,read,syscall -keep=asn1_parser2tree,_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 32"
+chopit.py -b=autokleepspa --inline=strlen,strcat,strncat --search=random-state -c=" --error-location=parser_aux.c:574 --max-time=3600 --max-memory=8095 " -f="_asn1_ltostr,read -keep=asn1_parser2tree,_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 32"
 cd ..
 cd dfs
 date > dfs.txt
-chopit.py -b=autokleepspa --inline=strlen,strcat,strncat --search=dfs -c=" --error-location=parser_aux.c:574 --max-time=3600 --max-memory=8095 " -f="_asn1_ltostr,read,syscall -keep=asn1_parser2tree,_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 32"
+chopit.py -b=autokleepspa --inline=strlen,strcat,strncat --search=dfs -c=" --error-location=parser_aux.c:574 --max-time=3600 --max-memory=8095 " -f="_asn1_ltostr,read -keep=asn1_parser2tree,_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 32"
 cd ..
 cd ..
 #
