@@ -1,3 +1,6 @@
+: <<'START'
+Benchmark to execute will start at START
+
 #
 cd CVE-2015-3622
 cd nurs
@@ -13,6 +16,8 @@ date > dfs.txt
 chopit.py -b=autokleepspa --inline=strcmp,strlen --search=dfs -c=" --error-location=decoding.c:91 --max-time=3600 --max-memory=8095 " -f="asn1_get_tag_der,asn1_parser2tree,read,__fd_open -keep=_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 64"
 cd ..
 cd ..
+
+START
 # should be 15
 cd CVE-2015-2806
 cd nurs
