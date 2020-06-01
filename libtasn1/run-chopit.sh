@@ -63,7 +63,7 @@ then
 	FLAGS="$FLAGS ${@:3}"
 fi
 
-if [ -n "$1" ]
+if [ -n "$1" ] && [ "$1" != "all" ]
 then
 	echo "Running benchmark '$1'"
 	if [ "$1" == "CVE-2012-1569" ]
