@@ -1,4 +1,9 @@
 #!/bin/bash
+if [ -n "$1" ] && [ "$1" == "--help" ]
+then
+	echo "usage: ./run-chopit.sh [BENCHMARK] [run|run-nurs|run-random|run-dfs] [FLAGS]"
+	exit
+fi
 
 BINARY_FILE=autokleepspa
 TIMEOUT="--max-time=3600 --max-memory=8095"
