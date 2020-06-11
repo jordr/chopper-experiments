@@ -2,7 +2,7 @@
 
 BINARY_FILE=autokleepspa
 TIMEOUT="--max-time=3600 --max-memory=8095"
-FLAGS="-b=$BINARY_FILE --dump-chopper-stats=0 $TIMEOUT "
+FLAGS="-b=$BINARY_FILE --dump-chopper-stats=0 --use-recovery-cache=1 $TIMEOUT "
 
 ensure_symbolic_links() {
 	test -f test.bc || ln -s ../test.bc test.bc
