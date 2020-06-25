@@ -1,7 +1,7 @@
 #!/bin/bash
-if [ -n "$1" ] && [ "$1" == "--help" ]
+if [ -z "$1" ] || [ "$1" == "--help" ]
 then
-	echo "usage: ./run-chopit.sh [BENCHMARK] [run|run-nurs|run-random|run-dfs] [FLAGS]"
+	echo "usage: ./run-chopit.sh BENCHMARK|all [run|run-nurs|run-random|run-dfs] [FLAGS]"
 	exit
 fi
 
@@ -19,8 +19,11 @@ do_chopit() {
 	ensure_symbolic_links
 	echo chopit.py $CHOPIT_FLAGS "${@:1}" > info.txt
 	echo Started: `date` >> info.txt
+	DATE_START=`date +%s`
 	chopit.py $CHOPIT_FLAGS "${@:1}"
 	echo Finished: `date` >> info.txt
+	DATE_END=`date +%s`
+	echo Elapsed: "$((($DATE_END-$DATE_START))) seconds" >> info.txt
 	cat info.txt
 	echo
 }
@@ -102,7 +105,7 @@ cd CVE-2015-3622
 run "--inline=strcmp,strlen" "--error-location=decoding.c:91" -f="asn1_get_tag_der,asn1_parser2tree,read,__fd_open -keep=_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 64"
 cd ..
 
-# should be 15
+# 
 cd CVE-2015-2806
 run "--inline=strlen,strcat,strncat" "--error-location=parser_aux.c:574" -f="_asn1_ltostr,asn1_parser2tree,read,__user_main, -keep=_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 15"
 cd ..
