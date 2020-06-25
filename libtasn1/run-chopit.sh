@@ -5,9 +5,9 @@ then
 	exit
 fi
 
-BINARY_FILE=autokleepspa
+BINARY_FILE=autoklee
 TIMEOUT="--max-time=3600 --max-memory=8095"
-FLAGS="-b=$BINARY_FILE --dump-chopper-stats=0 --use-recovery-cache=1 $TIMEOUT "
+FLAGS="-b=$BINARY_FILE --dump-chopper-stats=0 $TIMEOUT "
 
 ensure_symbolic_links() {
 	test -f test.bc || ln -s ../test.bc test.bc

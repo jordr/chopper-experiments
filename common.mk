@@ -30,7 +30,7 @@ GIT:=git
 ##
 ## LLVM
 ##
-LLVM_BUILD_DIR:=$(HOME)/code/llvm-38-build_O_D_A/bin
+LLVM_BUILD_DIR:=$(HOME)/code/llvm/3.8.0.obj-auto/llvm-38-build_O_D_A/bin
 LLVM_CONFIG:=$(LLVM_BUILD_DIR)/llvm-config
 CLANG:=$(LLVM_BUILD_DIR)/clang
 CLANGXX:=$(LLVM_BUILD_DIR)/clang++
@@ -50,7 +50,7 @@ EXTRACTBC=extract-bc
 ##
 ## KLEE
 ##
-KLEE_UCLIBC_DIR=$(TOOLS)/klee-uclibc-dynamic
+KLEE_UCLIBC_DIR=$(TOOLS)/klee-uclibc-3.8.0
 
 STP_DIR=$(TOOLS)/stp
 STP=$(STP_DIR)/build/stp
@@ -58,7 +58,7 @@ MINISAT_DIR=$(TOOLS)/minisat
 MINISAT=$(MINISAT_DIR)/build/libminisat.so
 
 KLEE_SRC_DIR=$(HOME)/code/autochopper-pspa
-KLEE_DIR=$(KLEE_SRC_DIR)/build# custom
+KLEE_DIR=$(KLEE_SRC_DIR)/build
 KLEE_BIN=$(KLEE_DIR)/bin
 KLEE=$(KLEE_BIN)/klee
 
