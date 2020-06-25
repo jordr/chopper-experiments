@@ -30,7 +30,7 @@ GIT:=git
 ##
 ## LLVM
 ##
-LLVM_BUILD_DIR:=$(HOME)/code/llvm-3.8.0.build/bin
+LLVM_BUILD_DIR:=$(HOME)/code/llvm-38-build_O_D_A/bin
 LLVM_CONFIG:=$(LLVM_BUILD_DIR)/llvm-config
 CLANG:=$(LLVM_BUILD_DIR)/clang
 CLANGXX:=$(LLVM_BUILD_DIR)/clang++
