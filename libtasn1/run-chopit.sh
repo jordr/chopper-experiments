@@ -91,7 +91,17 @@ then
 		cd ..
 	elif [ "$1" == "CVE-2014-3467" ]
 	then
-		echo "Not supported."
+		cd $1
+		mkdir -p cve1; cd cve1
+		$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:152" -f="asn1_get_length_ber,asn1_parser2tree,read,__user_main -keep=_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 32"
+		cd ..
+		mkdir -p cve2; cd cve2
+		$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:709" -f="asn1_get_length_ber,asn1_parser2tree,read,__user_main -keep=_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 32"
+		cd ..
+		mkdir -p cve3; cd cve3
+		$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:1131" -f="asn1_get_length_ber,asn1_parser2tree,read,__user_main -keep=_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 32"
+		cd ..
+		cd ..
 	else
 		echo "Benchmark unknown, nothing to do."
 	fi
