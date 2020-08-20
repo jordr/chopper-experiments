@@ -1,8 +1,10 @@
 #!/bin/bash
 
+KLEE=autoklee -use-pta-mode=static
+
 ulimit -s unlimited
 
-klee \
+$KLEE \
     -max-time=3600 \
     -max-memory=4096 \
     -simplify-sym-indices \
