@@ -2,7 +2,7 @@
 
 #KPTA=" -use-recovery-cache=1 -use-pta-mode=symbolic -use-modular-pta"
 
-run_experiment()
+run_experiment_new()
 {
 echo "* Running experiment $1 (chopper-pspa)"
 cd $1
@@ -11,11 +11,11 @@ make
 
 pids=
 # Make split searcher
-#echo "** Running split searchers"
-#echo "*** [cse-spa-split-searcher]"
-#prepare_cse cse-spa-split-searcher
-#make KSLICE="-use-recovery-cache=1 -use-pta-mode=static -split-search=1" all-cse
-#terminate_cse cse-spa-split-searcher
+echo "** Running split searchers"
+echo "*** [cse-spa-split-searcher]"
+prepare_cse cse-spa-split-searcher
+make KSLICE="-use-recovery-cache=1 -use-pta-mode=static -split-search=1" all-cse
+terminate_cse cse-spa-split-searcher
 
 
 echo "*** [cse-pspa-split-searcher]"
@@ -38,7 +38,7 @@ terminate_cse cse-pspa-no-searcher
 cd ..
 }
 
-run_experiment_old()
+run_experiment()
 {
 echo "* Running experiment $1"
 cd $1 
@@ -46,9 +46,10 @@ cd $1
 make
 
 # Running KLEE
-#prepare_klee klee
-#make all-klee
-#terminate_klee klee
+prepare_klee klee
+make all-klee
+terminate_klee klee
+return
 
 # Running CSE without CSE-crafted searcher
 prepare_cse cse-no-searcher
@@ -56,9 +57,9 @@ make all-cse
 terminate_cse cse-no-searcher
 
 # Running CSE with CSE-crafted searcher
-prepare_cse cse-split-searcher-10
-make KSLICE="$KPTA -split-search -split-ratio=10" all-cse
-terminate_cse cse-split-searcher-10
+#prepare_cse cse-split-searcher-10
+#make KSLICE="$KPTA -split-search -split-ratio=10" all-cse
+#terminate_cse cse-split-searcher-10
 
 prepare_cse cse-split-searcher-20
 make KSLICE="$KPTA -split-search -split-ratio=20" all-cse
@@ -77,9 +78,9 @@ terminate_cse cse-split-searcher-20
 # terminate_cse cse-split-searcher-50
 
 # Running CSE with CSE-optimized searcher
-prepare_cse cse-recovery-searcher-rp-10
-make KSLICE="$KPTA -recovery-search=random-path -split-ratio=10" all-cse
-terminate_cse cse-recovery-searcher-rp-10
+#prepare_cse cse-recovery-searcher-rp-10
+#make KSLICE="$KPTA -recovery-search=random-path -split-ratio=10" all-cse
+#terminate_cse cse-recovery-searcher-rp-10
 
 prepare_cse cse-recovery-searcher-rp-20
 make KSLICE="$KPTA -recovery-search=random-path -split-ratio=20" all-cse
@@ -101,9 +102,9 @@ terminate_cse cse-recovery-searcher-rp-20
 #make KSLICE="$KPTA -recovery-search=dfs -split-ratio=10" all-cse
 #terminate_cse cse-recovery-searcher-dfs-10
 
-#prepare_cse cse-recovery-searcher-dfs-20
-#make KSLICE="$KPTA -recovery-search=dfs -split-ratio=20" all-cse
-#terminate_cse cse-recovery-searcher-dfs-20
+prepare_cse cse-recovery-searcher-dfs-20
+make KSLICE="$KPTA -recovery-search=dfs -split-ratio=20" all-cse
+terminate_cse cse-recovery-searcher-dfs-20
 
 # prepare_cse cse-recovery-searcher-dfs-30
 # make KSLICE="$KPTA -recovery-search=dfs -split-ratio=30" all-cse
