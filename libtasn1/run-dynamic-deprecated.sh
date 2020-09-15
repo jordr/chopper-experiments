@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#KPTA=" -use-recovery-cache=1 -use-pta-mode=symbolic -use-modular-pta"
+KPTA=" -use-recovery-cache=1 -use-pta-mode=symbolic -use-modular-pta"
 
 run_experiment_new()
 {
@@ -56,31 +56,9 @@ prepare_cse cse-no-searcher
 make all-cse
 terminate_cse cse-no-searcher
 
-# Running CSE with CSE-crafted searcher
-#prepare_cse cse-split-searcher-10
-#make KSLICE="$KPTA -split-search -split-ratio=10" all-cse
-#terminate_cse cse-split-searcher-10
-
 prepare_cse cse-split-searcher-20
 make KSLICE="$KPTA -split-search -split-ratio=20" all-cse
 terminate_cse cse-split-searcher-20
-
-# prepare_cse cse-split-searcher-30
-# make KSLICE="$KPTA -split-search -split-ratio=30" all-cse
-# terminate_cse cse-split-searcher-30
-
-# prepare_cse cse-split-searcher-40
-# make KSLICE="$KPTA -split-search -split-ratio=40" all-cse
-# terminate_cse cse-split-searcher-40
-
-# prepare_cse cse-split-searcher-50
-# make KSLICE="$KPTA -split-search -split-ratio=50" all-cse
-# terminate_cse cse-split-searcher-50
-
-# Running CSE with CSE-optimized searcher
-#prepare_cse cse-recovery-searcher-rp-10
-#make KSLICE="$KPTA -recovery-search=random-path -split-ratio=10" all-cse
-#terminate_cse cse-recovery-searcher-rp-10
 
 prepare_cse cse-recovery-searcher-rp-20
 make KSLICE="$KPTA -recovery-search=random-path -split-ratio=20" all-cse
@@ -154,10 +132,10 @@ rm -r cse-run-coverage
 ## MAIN
 if [ -z $1 ]
 then
-	run_experiment CVE-2012-1569
-	run_experiment CVE-2014-3467
-	run_experiment CVE-2015-2806
-	run_experiment CVE-2015-3622
+	run_experiment_new CVE-2012-1569
+	run_experiment_new CVE-2014-3467
+	run_experiment_new CVE-2015-2806
+	run_experiment_new CVE-2015-3622
 elif [ -d $1 ]
 then
 	run_experiment $1
