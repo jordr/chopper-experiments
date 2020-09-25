@@ -38,4 +38,4 @@ $(TARGET): $(BC_DEPS)
 clean:
 	rm -rf $(DEPS) $(BC_DEPS) $(TARGET)
 	rm -f test.*
-	rm -rf klee-*
+#	rm -rf klee-*
