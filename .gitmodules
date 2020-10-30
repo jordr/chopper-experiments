@@ -1,3 +1,7 @@
 [submodule "auto-libtasn1/libtasn1-git"]
 	path = auto-libtasn1/libtasn1-git
 	url = https://github.com/gnutls/libtasn1
+[submodule "auto-libyaml/libyaml"]
+	path = auto-libyaml/libyaml-git
+	url = https://github.com/yaml/libyaml
+	branch = master
