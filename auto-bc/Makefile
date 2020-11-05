@@ -18,13 +18,13 @@ bc.bc: bc-git bc-git/Makefile
 	cd bc-git; \
 	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CC=$(WLLVM) $(MAKE) > compilation.log 2>&1; \
 	cd bin; \
-	$(EXTRACTBC) bc
+	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CC=wllvm $(EXTRACTBC) bc
 
 bc-git/Makefile: bc-git
 	@echo "Configuring $@"
 	-test -d bc-git/build || mkdir -p bc-git/build; \
 	cd bc-git; \
-	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CC=$(WLLVM) ./configure > /dev/null
+	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CC=$(WLLVM) ./configure --debug > /dev/null
 
 ##########################################
 #### Run KLEE experiments
