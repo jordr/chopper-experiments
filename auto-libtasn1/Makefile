@@ -16,11 +16,15 @@ LDFLAGS=
 		Running \e[0;32m$(CLANG) $(CFLAGS) $< -o $@\e[0;m"
 	$(CLANG) $(CFLAGS) $< -o $@
 
-SOURCES=$(shell ls $(SRC_PATH)/lib/*.c) main.c
+# SRC_MAIN=driver.c
+# TARGET=test-driver.bc
+SRC_MAIN=main.c
+TARGET=test.bc
+
+SOURCES=$(shell ls $(SRC_PATH)/lib/*.c) $(SRC_MAIN)
 DEPS=$(patsubst %.c,%.o,$(SOURCES))
 BC_DEPS=$(patsubst %.c,%.bc,$(SOURCES))
 
-TARGET=test.bc
 TIMEOUT_FLAGS=--max-time=3600 --max-memory=8095
 
 all: $(TARGET)
