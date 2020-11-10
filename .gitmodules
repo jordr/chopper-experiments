@@ -5,3 +5,6 @@
 	path = auto-libyaml/libyaml-git
 	url = https://github.com/yaml/libyaml
 	branch = master
+[submodule "auto-bc/bc-git"]
+	path = auto-bc/bc-git
+	url = https://github.com/gavinhoward/bc
