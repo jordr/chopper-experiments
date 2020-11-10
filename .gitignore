@@ -9,6 +9,11 @@ cscope.*
 *.swp
 *.swo
 
+auto-libyaml/run-libyaml-*
+auto-libtasn1/run-libtasn1-*
+auto-bc/run-bc-*
+*klee-out-*
+
 build/
 
 .cproject
