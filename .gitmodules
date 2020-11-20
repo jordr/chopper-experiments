@@ -8,3 +8,6 @@
 [submodule "auto-bc/bc-git"]
 	path = auto-bc/bc-git
 	url = https://github.com/gavinhoward/bc
+[submodule "auto-libosip/libosip-git"]
+	path = auto-libosip/libosip-git
+	url = git://git.savannah.gnu.org/osip.git
