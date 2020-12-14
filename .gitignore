@@ -14,6 +14,7 @@ auto-libtasn1/run-libtasn1-*
 auto-bc/run-bc-*
 auto-libosip/run-*
 auto-libosip/test-driver*
+auto-*/runk-*
 *klee-out-*
 
 build/
