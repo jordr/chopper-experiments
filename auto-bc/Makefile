@@ -16,7 +16,7 @@ clean:
 bc.bc: bc-git bc-git/Makefile
 	@echo "Compiling $@"
 	cd bc-git; \
-	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CC=$(WLLVM) $(MAKE) > compilation.log 2>&1; \
+	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CFLAGS=-I/home/jruiz/code/klee-uclibc-dynamic/include/ CC=$(WLLVM) $(MAKE) > compilation.log 2>&1 || cat compilation.log; \
 	cd bin; \
 	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CC=wllvm $(EXTRACTBC) bc
 
