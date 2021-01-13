@@ -3,35 +3,37 @@ include $(ROOT)/common.mk
 
 .SILENT:
 
-.PHONY: all
 all: bc.bc
 
 .PHONY: clean
 clean:
 	rm -rf bc-git/bin/
-	rm -r bytecode/
+	rm -rf bytecode/
+	rm -f bc.bc
 
 ##########################################
 #### Case study
 ##########################################
 BC_DIR:=$(realpath .)/bytecode
 
-bc.bc: bc-git bc-git/Makefile
-	@echo "Compiling $@ into $(BC_DIR)"
-	mkdir -p $(BC_DIR); \
+bc.bc: bc-git/Makefile
+	@echo "Compiling into $(BC_DIR)"
+	mkdir -p $(BC_DIR)
 	cd bc-git; \
+	make clean &&\
 	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CFLAGS=-I/home/jruiz/code/klee-uclibc-dynamic/include/ WLLVM_BC_STORE=$(BC_DIR) CC=$(WLLVM) $(MAKE) > compilation.log 2>&1 || cat compilation.log; \
 	cd ..
-	@echo Linking bc files...
-	$(LINK) $(BC_DIR)/* -o bc.bc
+	@echo Begin process to link bc files into $@
+	cd $(BC_DIR); \
+	../link.sh * &&	cp bc.bc ..
 	#cd bin; \
 	#LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CC=wllvm $(EXTRACTBC) bc
 
-bc-git/Makefile: bc-git
+bc-git/Makefile:
 	@echo "Configuring $@"
 	-test -d bc-git/build || mkdir -p bc-git/build; \
 	cd bc-git; \
-	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CC=$(WLLVM) HOSTCFLAGS= ./configure --debug > /dev/null
+	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CC=$(WLLVM) HOSTCFLAGS= ./configure.sh --debug > /dev/null
 
 ##########################################
 #### Run KLEE experiments (not used)
