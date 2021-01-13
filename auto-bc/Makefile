@@ -23,7 +23,7 @@ bc.bc: bc-git bc-git/Makefile
 	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CFLAGS=-I/home/jruiz/code/klee-uclibc-dynamic/include/ WLLVM_BC_STORE=$(BC_DIR) CC=$(WLLVM) $(MAKE) > compilation.log 2>&1 || cat compilation.log; \
 	cd ..
 	@echo Linking bc files...
-	$(LINK) $(BC_DIR)/* bc.bc
+	$(LINK) $(BC_DIR)/* -o bc.bc
 	#cd bin; \
 	#LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CC=wllvm $(EXTRACTBC) bc
 
