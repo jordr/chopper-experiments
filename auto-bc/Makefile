@@ -10,6 +10,7 @@ clean:
 	rm -rf bc-git/bin/
 	rm -rf bytecode/
 	rm -f bc.bc
+	rm -f bc-git/Makefile
 
 ##########################################
 #### Case study
@@ -31,9 +32,10 @@ bc.bc: bc-git/Makefile
 
 bc-git/Makefile:
 	@echo "Configuring $@"
+	@echo "LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CFLAGS=-I/home/jruiz/code/klee-uclibc-dynamic/include/ CC=$(WLLVM) HOSTCFLAGS= ./configure.sh --debug"
 	-test -d bc-git/build || mkdir -p bc-git/build; \
 	cd bc-git; \
-	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CC=$(WLLVM) HOSTCFLAGS= ./configure.sh --debug > /dev/null
+	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CFLAGS=-I/home/jruiz/code/klee-uclibc-dynamic/include/ CC=$(WLLVM) HOSTCFLAGS= ./configure.sh --debug > /dev/null
 
 ##########################################
 #### Run KLEE experiments (not used)
