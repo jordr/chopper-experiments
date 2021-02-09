@@ -12,6 +12,107 @@
     typedef ASN1_TYPE ASN1_NODE_TYPE;
 #endif
 
+typedef struct
+{
+  int lineNumber;
+  char *line;
+  int errorNumber;
+  char *errorDescription;
+} test_type;
+
+char fileCorrectName[] = "Test_parser.asn";
+char fileErroredName[] = "Test_parser_ERROR.asn";
+
+int
+readLine (FILE *file, char *line)
+{
+  int c;
+  while (((c = fgetc(file)) != EOF) && ( c != 10))
+    {
+        *line = c;
+        line++;
+    }
+
+  *line = 0;
+
+  return c;
+}
+
+void
+createFile (int lineNumber, char *line)
+{
+  FILE *fileIn, *fileOut;
+  char lineRead[1024];
+  int fileInLineNumber = 0;
+
+  fileIn = fopen(fileCorrectName, "r");
+  if (fileIn == NULL) printf("Failed to read %s\n", fileCorrectName); 
+  fileOut = fopen(fileErroredName, "w");
+  if (fileOut == NULL) printf("Failedto open for write %s\n", fileErroredName);
+
+  while (readLine (fileIn, lineRead) != EOF)
+    {
+      fileInLineNumber++;
+      printf("Line Number: %d\n", fileInLineNumber);
+      printf("Target lineNumber: %d\n", lineNumber);
+      if (fileInLineNumber == lineNumber){
+          fprintf (fileOut, "%s\n", line);
+      } else { 
+          fprintf (fileOut, "%s\n", lineRead);
+      }
+    }
+
+  fclose (fileOut);
+  fclose (fileIn);
+}
+
+int test_parser(){
+    asn1_retCode result;
+    ASN1_TYPE definitions = ASN1_TYPE_EMPTY;
+    char errorDescription[ASN1_MAX_ERROR_DESCRIPTION_SIZE];
+    test_type *test;
+    int errorCounter = 0, testCounter = 0;
+    char *buf1, *buf2, *buf3, *buf4;
+    buf1 = malloc(SIZE);
+    buf2 = malloc(SIZE);
+    buf3 = malloc(SIZE);
+    buf4 = malloc(SIZE);
+    klee_make_symbolic(buf1, SIZE, "buf");
+    klee_assume(buf1[VAL_SIZE-1] == '\0');
+    klee_make_symbolic(buf2, SIZE, "buf");
+    klee_assume(buf2[VAL_SIZE-1] == '\0');
+    klee_make_symbolic(buf3, SIZE, "buf");
+    klee_assume(buf3[VAL_SIZE-1] == '\0');
+    klee_make_symbolic(buf4, SIZE, "buf");
+    klee_assume(buf4[VAL_SIZE-1] == '\0');
+    test_type test_array[] = {
+        {12, buf1, ASN1_SUCCESS, ""},
+        {12, buf2, ASN1_NAME_TOO_LONG, ""},
+        {16, buf3, ASN1_IDENTIFIER_NOT_FOUND, ""},
+        {20, buf4, ASN1_SYNTAX_ERROR, ""},
+        {0}
+    };
+    
+    test = test_array;
+    while (test->lineNumber !=0 ){
+        testCounter++;
+        printf("creating File.\n");
+        createFile(test->lineNumber, test->line);
+        result = asn1_parser2tree (fileErroredName, &definitions, errorDescription);
+        asn1_delete_structure (&definitions);
+        if ((result != test->errorNumber) || (strcmp (errorDescription, test->errorDescription))){
+	        errorCounter++;
+	    }
+        test++;
+    }
+    printf("Finished Creation");
+    free(buf1);
+    free(buf2);
+    free(buf3);
+    free(buf4);
+    return 0;
+}
+
 int test_encoding(size_t buf_size){
     int result;
     ASN1_NODE_TYPE definitions = NULL;
@@ -136,6 +237,7 @@ int test_decoding(size_t buf_size){
         return 1;
     }
     printf("Decoding complete.\n");
+    free(buf);
     return 0;  
 }
 
@@ -152,8 +254,7 @@ int run(char *argv[]){
             buf_size = strtoul(argv[1], NULL, 10);
             return test_encoding(buf_size);
         case 3:
-            // TODO: Add more tests to cover other libtasn functions
-            break;
+            return test_parser();
         default:
             break;
     }
