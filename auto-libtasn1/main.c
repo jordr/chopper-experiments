@@ -12,6 +12,9 @@
     typedef ASN1_TYPE ASN1_NODE_TYPE;
 #endif
 
+#define SIZE 200
+#define VAL_SIZE 100
+
 typedef struct
 {
   int lineNumber;
