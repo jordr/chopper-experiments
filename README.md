@@ -25,4 +25,8 @@ In order to run the auto benchmarks, you should use the `chopem.py` script from 
 chopem.py --execute-chopper=1 --log=info --new-revision=master <repository folder>
 ```
 
-For auto-libtasn1, we use `--new-revision=libtasn1_2_10` as the start point.
+## auto-libtasn1
+
+OLD: For auto-libtasn1, we use `--new-revision=libtasn1_2_10` as the start point.
+
+NEW: We use `--new-revision=libtasn1_4_4`. The `configure` file is absent, so you need to do `touch ./ChangeLog; autoreconf --install --verbose`, and possibly install some missing packages.
