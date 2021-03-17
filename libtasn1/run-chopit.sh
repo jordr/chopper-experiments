@@ -77,29 +77,29 @@ then
 	if [ "$1" == "CVE-2012-1569" ]
 	then
 		cd $1
-		$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:137" -f="asn1_get_tag_der,asn1_parser2tree,read,__user_main -keep=_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 32"
+		$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:137" -f="asn1_get_tag_der,asn1_parser2tree,read,__user_main -keep=_asn1_yyparse,_asn1_yylex,ioctl" "--args=32" "test.bc"
 		cd ..
 	elif [ "$1" == "CVE-2015-3622" ]
 	then
 	  	cd $1
-		$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:91" -f="asn1_get_tag_der,asn1_parser2tree,read,__fd_open -keep=_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 64"
+		$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:91" -f="asn1_get_tag_der,asn1_parser2tree,read,__fd_open -keep=_asn1_yyparse,_asn1_yylex,ioctl" "--args=64" "test.bc"
 		cd ..
 	elif [ "$1" == "CVE-2015-2806" ]
 	then
 	  	cd $1
-		$RUN_CMD "--inline=strlen,strcat,strncat" "--error-location=parser_aux.c:574" -f="_asn1_ltostr,asn1_parser2tree,read,__user_main, -keep=_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 15"
+		$RUN_CMD "--inline=strlen,strcat,strncat" "--error-location=parser_aux.c:574" -f="_asn1_ltostr,asn1_parser2tree,read,__user_main, -keep=_asn1_yyparse,_asn1_yylex,ioctl" "--args=15" "test.bc"
 		cd ..
 	elif [ "$1" == "CVE-2014-3467" ]
 	then
 		cd $1
 		mkdir -p cve1; cd cve1
-		$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:152" -f="asn1_get_length_ber,asn1_parser2tree,read,__user_main -keep=_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 32"
+		$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:152" -f="asn1_get_length_ber,asn1_parser2tree,read,__user_main -keep=_asn1_yyparse,_asn1_yylex,ioctl" "--args=32" "test.bc"
 		cd ..
 		mkdir -p cve2; cd cve2
-		$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:709" -f="asn1_get_length_ber,asn1_parser2tree,read,__user_main -keep=_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 32"
+		$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:709" -f="asn1_get_length_ber,asn1_parser2tree,read,__user_main -keep=_asn1_yyparse,_asn1_yylex,ioctl" "--args=32" "test.bc"
 		cd ..
 		mkdir -p cve3; cd cve3
-		$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:1131" -f="asn1_get_length_ber,asn1_parser2tree,read,__user_main -keep=_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 32"
+		$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:1131" -f="asn1_get_length_ber,asn1_parser2tree,read,__user_main -keep=_asn1_yyparse,_asn1_yylex,ioctl" "--args=32" "test.bc"
 		cd ..
 		cd ..
 	else
@@ -111,17 +111,17 @@ fi
 echo "Running all benchmarks"
 #
 cd CVE-2015-3622
-$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:91" -f="asn1_get_tag_der,asn1_parser2tree,read,__fd_open -keep=_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 64"
+$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:91" -f="asn1_get_tag_der,asn1_parser2tree,read,__fd_open -keep=_asn1_yyparse,_asn1_yylex,ioctl" "--args=64" "test.bc"
 cd ..
 
 # 
 cd CVE-2015-2806
-$RUN_CMD "--inline=strlen,strcat,strncat" "--error-location=parser_aux.c:574" -f="_asn1_ltostr,asn1_parser2tree,read,__user_main, -keep=_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 15"
+$RUN_CMD "--inline=strlen,strcat,strncat" "--error-location=parser_aux.c:574" -f="_asn1_ltostr,asn1_parser2tree,read,__user_main, -keep=_asn1_yyparse,_asn1_yylex,ioctl" "--args=15" "test.bc"
 cd ..
 
 #
 cd CVE-2012-1569
-$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:137" -f="asn1_get_tag_der,asn1_parser2tree,read,__user_main -keep=_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 32"
+$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:137" -f="asn1_get_tag_der,asn1_parser2tree,read,__user_main -keep=_asn1_yyparse,_asn1_yylex,ioctl" "--args=32" "test.bc"
 cd ..
 
 # 
@@ -129,18 +129,18 @@ cd CVE-2014-3467
 mkdir -p cve1 
 cd cve1
 ensure_symbolic_links
-$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:152" -f="asn1_get_length_ber,asn1_parser2tree,read,__user_main -keep=_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 32"
+$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:152" -f="asn1_get_length_ber,asn1_parser2tree,read,__user_main -keep=_asn1_yyparse,_asn1_yylex,ioctl" "--args=32" "test.bc"
 cd ..
 #
 mkdir -p cve2 
 cd cve2
 ensure_symbolic_links
-$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:709" -f="asn1_get_length_ber,asn1_parser2tree,read,__user_main -keep=_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 32"
+$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:709" -f="asn1_get_length_ber,asn1_parser2tree,read,__user_main -keep=_asn1_yyparse,_asn1_yylex,ioctl" "--args=32" "test.bc"
 cd ..
 #
 mkdir -p cve3
 cd cve3
 ensure_symbolic_links
-$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:1131" -f="asn1_get_length_ber,asn1_parser2tree,read,__user_main -keep=_asn1_yyparse,_asn1_yylex,ioctl" "test.bc 32"
+$RUN_CMD "--inline=strcmp,strlen" "--error-location=decoding.c:1131" -f="asn1_get_length_ber,asn1_parser2tree,read,__user_main -keep=_asn1_yyparse,_asn1_yylex,ioctl" "--args=32" "test.bc"
 cd ..
 cd ..
