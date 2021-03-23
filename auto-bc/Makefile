@@ -20,6 +20,7 @@ BC_DIR:=$(realpath .)/bytecode
 bc.bc: bc-git/Makefile
 	@echo "Compiling into $(BC_DIR)"
 	mkdir -p $(BC_DIR)
+	@echo LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CFLAGS=-I/home/jruiz/code/klee-uclibc-dynamic/include/ WLLVM_BC_STORE=$(BC_DIR) CC=$(WLLVM) $(MAKE)
 	cd bc-git; \
 	make clean &&\
 	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CFLAGS=-I/home/jruiz/code/klee-uclibc-dynamic/include/ WLLVM_BC_STORE=$(BC_DIR) CC=$(WLLVM) $(MAKE) > compilation.log 2>&1 || cat compilation.log; \
@@ -35,7 +36,7 @@ bc-git/Makefile:
 	@echo "LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CFLAGS=-I/home/jruiz/code/klee-uclibc-dynamic/include/ CC=$(WLLVM) HOSTCFLAGS= ./configure.sh --debug"
 	-test -d bc-git/build || mkdir -p bc-git/build; \
 	cd bc-git; \
-	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CFLAGS=-I/home/jruiz/code/klee-uclibc-dynamic/include/ CC=$(WLLVM) HOSTCFLAGS= ./configure.sh --debug > /dev/null
+	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CFLAGS=-I/home/jruiz/code/klee-uclibc-dynamic/include/ CC=$(WLLVM) HOSTCFLAGS= ./configure.sh --debug > configure.log
 
 ##########################################
 #### Run KLEE experiments (not used)
