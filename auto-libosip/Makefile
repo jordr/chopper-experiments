@@ -26,7 +26,12 @@ all:$(BC_TARGET)
 
 .PHONY: osip_archive osip_archive_gcov
 
-libosip-git/build/Makefile: libosip-git
+libosip-git/configure: libosip-git
+	@echo "Bootstrapping"
+	cd libosip-git; \
+		./autogen.sh
+
+libosip-git/build/Makefile: libosip-git/configure
 	@echo "Configuring $@"
 	-test -d libosip-git/build || mkdir -p libosip-git/build; \
 	cd libosip-git/build; \
