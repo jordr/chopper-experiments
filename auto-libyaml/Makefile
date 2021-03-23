@@ -10,13 +10,17 @@ LDFLAGS=-lgcov --coverage
 CC=gcc
 
 $(SRC_PATH)/Makefile:
-	LLVM_COMPILER_PATH=~/code/llvm/3.8.0.obj-auto/llvm-38-build_O_D_A/bin LLVM_COMPILER=clang CC=wllvm ./configure
+	cd $(SRC_PATH) && LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CC=$(WLLVM) ./configure
+
+$(SRC_PATH)/configure:
+	cd $(SRC_PATH) && ./bootstrap
 
 %.o: %.c
-	$(CC) $(CFLAGS) -fprofile-arcs -ftest-coverage $< -o $@
+	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang $(WLLVM) -c $(CFLAGS) -fprofile-arcs -ftest-coverage $< -o $@
+
 
 %.bc: %.c
-	$(CLANG) $(CFLAGS) -DTEST_SYMBOLIC $< -o $@
+	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang $(WLLVM) $(CFLAGS) -DTEST_SYMBOLIC $< -o $@
 
 SOURCES=$(shell ls $(SRC_PATH)/src/*.c) main.c
 DEPS=$(patsubst %.c,%.o,$(SOURCES))
@@ -30,7 +34,7 @@ $(BC_TARGET): $(BC_DEPS)
 	$(DIS) $@
 
 $(TARGET): $(DEPS)
-	$(CC) $^ -o $@ $(LDFLAGS) 
+	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang $(WLLVM) $^ -o $@ $(LDFLAGS) 
 
 all: $(BC_TARGET)
 

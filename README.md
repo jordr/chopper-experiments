@@ -38,3 +38,8 @@ We use `--new-revision=origin/library` as the start point, though we previously 
 ## auto-libosip
 
 We use `--new-revision=master`
+
+## auto-libyaml
+
+We use `--new-revision=master`.
+If an error "no config.h file" appears, this may be a leftover Makefile in libyaml-git, remove it.
