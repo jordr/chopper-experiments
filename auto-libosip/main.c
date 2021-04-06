@@ -54,7 +54,7 @@ int test_contact_id(){
     char *a_contact = NULL;
     char *dest = NULL;
     a_contact = (char *) osip_malloc(500);
-    //klee_make_symbolic(a_contact, 500, "contact");
+    klee_make_symbolic(a_contact, 500, "contact");
     osip_contact_init(&contact);
     osip_contact_parse(contact, a_contact);
     if (osip_contact_to_str(contact, &dest) != -1){
