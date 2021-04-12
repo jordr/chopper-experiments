@@ -26,7 +26,7 @@ bc.bc: bc-git/Makefile
 	cd ..
 	@echo Begin process to link bc files into $@
 	cd $(BC_DIR); \
-	../link.sh * &&	cp bc.bc ..
+	../link.sh * 
 	#cd bin; \
 	#LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CC=wllvm $(EXTRACTBC) bc
 
