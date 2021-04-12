@@ -6,7 +6,7 @@ include $(ROOT)/common.mk
 SRC_PATH=./libtasn1-git/
 
 INCLUDES=-I $(KLEE_SRC_DIR)/include -I $(SRC_PATH) -I $(SRC_PATH)/lib -I $(SRC_PATH)/lib/gllib
-DEFINES=-D_GNU_SOURCE -DSIZEOF_UNSIGNED_INT=4 -DSIZEOF_UNSIGNED_LONG_INT=8 -DASN1_BUILDING
+DEFINES=-D_GL_ATTRIBUTE_PURE= -D_GNU_SOURCE -DSIZEOF_UNSIGNED_INT=4 -DSIZEOF_UNSIGNED_LONG_INT=8 -DASN1_BUILDING
 
 CFLAGS=-emit-llvm -c -g $(DEFINES) $(INCLUDES)
 LDFLAGS=
@@ -14,7 +14,7 @@ LDFLAGS=
 %.bc: %.c
 	echo -e "\e[0;31m [%$@]\e[0;m\
 		Running \e[0;32m$(CLANG) $(CFLAGS) $< -o $@\e[0;m"
-	$(CLANG) $(CFLAGS) $< -o $@
+	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang $(WLLVM) $(CFLAGS) $< -o $@
 
 # SRC_MAIN=driver.c
 # TARGET=test-driver.bc
