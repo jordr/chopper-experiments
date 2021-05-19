@@ -8,7 +8,7 @@ DEFINES=
 COVERAGE_CFLAGS=-fprofile-arcs -ftest-coverage
 COVERAGE_LDFLAGS=-lgcov --coverage
 
-CFLAGS=$(INCLUDES) $(DEFINES) -g
+CFLAGS=$(INCLUDES) $(DEFINES) -g -O0
 LDFLAGS=
 CC=gcc
 
@@ -35,7 +35,7 @@ libosip-git/build/Makefile: libosip-git/configure
 	@echo "Configuring $@"
 	-test -d libosip-git/build || mkdir -p libosip-git/build; \
 	cd libosip-git/build; \
-	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CC=$(WLLVM) ../configure CC=$(WLLVM) >/dev/null
+	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CC=$(WLLVM) ../configure CC=$(WLLVM) CFLAGS="-g -O0" >/dev/null
 
 osip_archive: libosip-git/build/Makefile
 	@echo "Making $@"
