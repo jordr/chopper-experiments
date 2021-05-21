@@ -14,8 +14,7 @@ LDFLAGS=
 
 %.bc: %.c
 	echo -e "\e[0;31m [%$@]\e[0;m\
-
-	Running \e[0;32m$(CLANG) $(CFLAGS) $< -o $@\e[0;m"
+			Running \e[0;32m$(CLANG) $(CFLAGS) $< -o $@\e[0;m"
 	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang $(WLLVM) $(CFLAGS) $< -o $@
 
 # SRC_MAIN=driver.c
