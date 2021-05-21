@@ -36,7 +36,6 @@ bc-git/Makefile:
 	@echo "LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CFLAGS=-I/home/jruiz/code/klee-uclibc-dynamic/include/ CC=$(WLLVM) HOSTCFLAGS= ./configure.sh --debug"
 	-test -d bc-git/build || mkdir -p bc-git/build; \
 	cd bc-git; \
-
 	LLVM_COMPILER_PATH=$(LLVM_BUILD_DIR) LLVM_COMPILER=clang CFLAGS=-I/home/jruiz/code/klee-uclibc-dynamic/include/ CC=$(WLLVM) HOSTCFLAGS= ./configure.sh --debug > configure.log
 
 ##########################################
