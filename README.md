@@ -30,3 +30,16 @@ chopem.py --execute-chopper=1 --log=info --new-revision=master <repository folde
 OLD: For auto-libtasn1, we use `--new-revision=libtasn1_2_10` as the start point.
 
 NEW: We use `--new-revision=libtasn1_4_4`. The `configure` file is absent, so you need to do `touch ./ChangeLog; autoreconf --install --verbose`, and possibly install some missing packages.
+
+## auto-bc
+
+We use `--new-revision=origin/library` as the start point, though we previously used `master`
+
+## auto-libosip
+
+We use `--new-revision=master`
+
+## auto-libyaml
+
+We use `--new-revision=master`.
+If an error "no config.h file" appears, this may be a leftover Makefile in libyaml-git, remove it.
